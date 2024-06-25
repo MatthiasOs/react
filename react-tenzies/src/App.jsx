@@ -9,6 +9,7 @@ export default function App() {
     const [dice, setDice] = React.useState(allNewDice())
     const [tenzies, setTenzies] = React.useState(false)
     const [rolls, setRolls] = React.useState(0)
+    const [time, setTime] = React.useState(Date.now())
     
     React.useEffect(() => {
         const allHeld = dice.every(die => die.isHeld)
@@ -46,6 +47,7 @@ export default function App() {
         } else {
             setTenzies(false)
             setDice(allNewDice())
+            setTime(Date.now())
         }
     }
     
@@ -55,6 +57,11 @@ export default function App() {
                 {...die, isHeld: !die.isHeld} :
                 die
         }))
+    }
+
+    function getAmountOfSeconds(){
+        const now = Date.now()
+        return ((now -  time) / 1000).toFixed()
     }
     
     const diceElements = dice.map(die => (
@@ -83,7 +90,7 @@ export default function App() {
             </button>
             {tenzies &&
                 <div className="result">
-                    You needed {rolls} rolls!
+                    It took you {getAmountOfSeconds()} seconds and you needed {rolls} rolls!
                 </div>
             }
         </main>
