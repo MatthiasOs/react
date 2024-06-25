@@ -1,4 +1,4 @@
-import './Die.css'
+import './die.css'
 
 export default function Die(props) {
     const styles = {
