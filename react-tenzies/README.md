@@ -11,6 +11,5 @@ npm run dev
 
 ## TODO
 
-- track the number of rolls
 - track the time it took to win
 - save your best time to local storage
