@@ -10,6 +10,22 @@ export default function App() {
     const [tenzies, setTenzies] = React.useState(false)
     const [rolls, setRolls] = React.useState(0)
     const [time, setTime] = React.useState(Date.now())
+    //const [results, setResults] = React.useState(() => JSON.parse(localStorage.getItem("results")) || [])
+    const [results, setResults] = React.useState([])
+
+    React.useEffect(() => {
+        if(tenzies){
+            console.log("All Old Results:", results)
+            setResults(prev => {
+                console.log(prev)
+                const newArray = [...prev, {time:1, rolls:1}]
+                console.log(newArray)
+                return newArray
+            })
+            console.log("All New Results:", results)
+            localStorage.setItem("results", results)
+        }
+    },[tenzies])
     
     React.useEffect(() => {
         const allHeld = dice.every(die => die.isHeld)
@@ -17,6 +33,7 @@ export default function App() {
         const allSameValue = dice.every(die => die.value === firstValue)
         if (allHeld && allSameValue) {
             setTenzies(true)
+            
         }
     }, [dice])
 
